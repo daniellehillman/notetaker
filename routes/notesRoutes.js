@@ -3,10 +3,10 @@ const { join } = require('path')
 const fs = require('fs')
 const uuid = require('uuid')
 
-let notes = []
+// let notes = []
 // GET all items
 router.get('/notes', (req, res) => {
-    res.json(notes)
+
   fs.readFile(join(__dirname, '..', 'db', 'db.json'), 'utf8', (err, data) => {
     if (err) { console.log(err) }
     res.json(JSON.parse(data))
@@ -22,7 +22,7 @@ router.post('/notes', (req, res) => {
     let note = {
         id: uuid.v1(),
         text: req.body.text,
-        isDone: req.body.isDone
+        title: req.body.title
 
     }
     notes.push(note)
@@ -48,7 +48,7 @@ router.put('/notes/:text', (req, res) => {
 
         for (let i = 0; i < notes.length; i++) {
             if (notes[i].text === req.params.text) {
-              notes[i].isDone = req.body.isDone
+              notes[i].title = req.body.title
             }
           }
     
