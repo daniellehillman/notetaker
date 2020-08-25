@@ -37,9 +37,8 @@ router.post('/notes', (req, res) => {
 })
 })
 
-
 // PUT one item
-router.put('/notes/:text', (req, res) => {
+router.put('/notes/:id', (req, res) => {
 
     fs.readFile(join(__dirname, '..', 'db', 'db.json'), 'utf8', (err, data) => {
         if (err) { console.log(err) }
@@ -47,7 +46,7 @@ router.put('/notes/:text', (req, res) => {
         let notes = JSON.parse(data)
 
         for (let i = 0; i < notes.length; i++) {
-            if (notes[i].text === req.params.text) {
+            if (notes[i].id === req.params.id) {
               notes[i].title = req.body.title
             }
           }
@@ -60,8 +59,6 @@ router.put('/notes/:text', (req, res) => {
 })
 })
 })
-
-
 
 //   // DELETE one item
 router.delete('/notes/:id', (req, res) => {
@@ -81,7 +78,6 @@ router.delete('/notes/:id', (req, res) => {
 })
 })
 })
-
 
   
   module.exports = router
